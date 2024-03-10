@@ -1,4 +1,4 @@
-package space.rozlach.testtaskproject.data.remote.dto
+package space.rozlach.testtaskproject.domain.model
 
 data class Item(
     val popisk: String,
@@ -8,5 +8,5 @@ data class Item(
     val begda: String,
     val endda: String,
     val exported: String,
-    val filename: String,
+    val filename: String
 )
