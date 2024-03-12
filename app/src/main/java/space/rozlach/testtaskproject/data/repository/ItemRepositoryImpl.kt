@@ -9,10 +9,12 @@ import space.rozlach.testtaskproject.data.remote.dto.ItemDetailDto
 import space.rozlach.testtaskproject.data.remote.dto.ItemDto
 import space.rozlach.testtaskproject.domain.model.ItemDetail
 import space.rozlach.testtaskproject.domain.repository.ItemRepository
+import javax.inject.Inject
 
-class ItemRepositoryImpl: ItemRepository {
+class ItemRepositoryImpl @Inject constructor( private val firebaseDb: FirebaseDatabase,
+): ItemRepository {
 
-    private val database = FirebaseDatabase.getInstance().reference
+    private val database = firebaseDb.reference
 
     override suspend fun getItemsList():List<ItemDto> {
         val dataList = mutableListOf<ItemDto>()

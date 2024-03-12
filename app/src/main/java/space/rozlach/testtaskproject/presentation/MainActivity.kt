@@ -1,31 +1,47 @@
 package space.rozlach.testtaskproject.presentation
 
+import android.content.res.Resources.Theme
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.navigation.NavType
+import androidx.navigation.compose.rememberNavController
 import space.rozlach.testtaskproject.R
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.google.firebase.FirebaseApp
+import dagger.hilt.android.AndroidEntryPoint
+import space.rozlach.testtaskproject.presentation.items_detail.ItemDetailScreen
+import space.rozlach.testtaskproject.presentation.items_list.ItemListScreen
 
-class MainActivity : AppCompatActivity() {
+
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-//        val ref = FirebaseDatabase.getInstance().reference
-//
-//        // Read data from the database
-//        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // Handle data retrieval
-//                for (snapshot in dataSnapshot.children) {
-//                    val key = snapshot.key
-//                    val value = snapshot.value
-//                    println("Key: $key, Value: $value")
-//                }
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Handle error
-//                println("Error: ${databaseError.message}")
-//            }
-//        })
-    }
+        setContent {
+//                Surface(color = MaterialTheme.colors.background) {
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.ItemListScreen.route
+                    ) {
+                        composable(
+                            route = Screen.ItemListScreen.route
+                        ) {
+                            ItemListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.ItemDetailScreen.route + "/{itemPopisk}"
+                        ) {
+                            ItemDetailScreen()
+                        }
+                    }
+                }
+            }
+//    }
 }

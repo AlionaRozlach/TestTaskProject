@@ -1,6 +1,5 @@
 package space.rozlach.testtaskproject.domain.use_case.get_item
 
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import space.rozlach.testtaskproject.core.Resource
@@ -17,7 +16,7 @@ class GetItemUseCase @Inject constructor(private val repository: ItemRepository)
         try {
             emit(Resource.Loading())
             val item = repository.getItemDetail(popisk)?.toItemDetail()
-        } catch (e: HttpException) {
+        } catch (e: IOException) {
             emit(Resource.Error<ItemDetail>(e.localizedMessage ?: "An unexpected error occured"))
         } catch (e: IOException) {
             emit(Resource.Error<ItemDetail>("Couldn't reach server. Check your internet connection."))
