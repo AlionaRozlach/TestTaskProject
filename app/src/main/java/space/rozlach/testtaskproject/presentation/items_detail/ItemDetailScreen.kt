@@ -21,6 +21,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.ramcosta.composedestinations.annotation.Destination
+import space.rozlach.testtaskproject.core.Constants
 
 @Composable
 @Destination
@@ -227,7 +228,7 @@ fun WebView() {
             }
         },
         update = { webView ->
-            webView.loadUrl("https://sa.aramark.cz/naradovna/listek/")
+            webView.loadUrl(Constants.URL)
         }
     )
 }
