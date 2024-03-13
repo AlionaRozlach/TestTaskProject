@@ -14,11 +14,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.annotation.Destination
 import space.rozlach.testtaskproject.presentation.Screen
 import space.rozlach.testtaskproject.presentation.items_list.components.ItemListElement
 
 @Composable
+@Destination
 fun ItemDetailScreen(
+    popisk: String,
     viewModel: ItemDetailViewModel = hiltViewModel()
 ){
     val state = viewModel.state.value

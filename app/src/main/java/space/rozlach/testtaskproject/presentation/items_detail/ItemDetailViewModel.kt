@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import space.rozlach.testtaskproject.core.Constants
 import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.domain.use_case.get_item.GetItemUseCase
@@ -20,13 +21,13 @@ class ItemDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(ItemDetailState())
-    val state: State<ItemDetailState> = _state
+    private var _state = mutableStateOf(ItemDetailState())
+    var state: State<ItemDetailState> = _state
 
     init {
-        savedStateHandle.get<String>(Constants.PARAM_ITEM_POPISK)?.let { popisk ->
+        val popisk = savedStateHandle.get<String>("popisk")
+        if (!popisk.isNullOrEmpty())
             getItem(popisk)
-        }
     }
 
     private fun getItem(popisk: String) {

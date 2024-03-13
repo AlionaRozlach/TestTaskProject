@@ -16,12 +16,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import space.rozlach.testtaskproject.presentation.Screen
+import space.rozlach.testtaskproject.presentation.destinations.ItemDetailScreenDestination
 import space.rozlach.testtaskproject.presentation.items_list.components.ItemListElement
 
 @Composable
+@Destination(start = true)
 fun ItemListScreen(
-    navController: NavController,
+    navigator: DestinationsNavigator,
     viewModel: ItemsListViewModel = hiltViewModel()
 ){
     val state = viewModel.state.value
@@ -31,8 +35,7 @@ fun ItemListScreen(
                 ItemListElement(
                     item = item,
                     onItemClick = {
-//                        navController.navigate(Screen.ItemDetailScreen.route + "/${item.popisk}")
-                        navController.navigate("${Screen.ItemDetailScreen.route}/${item.popisk}")
+                        navigator.navigate(ItemDetailScreenDestination(item.popisk))
                     }
                 )
             }
