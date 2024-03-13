@@ -39,124 +39,28 @@ fun ItemDetailScreen(
             state.items?.let { item ->
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Popis: " + item.popisk,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Popis: ", value = item.popisk)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Begda: " + item.begda,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Begda: ", value = item.begda)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "End date: " + item.endda,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "End date: ", value = item.endda)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "SCHKZ: " + item.schkz,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Schkz: ", value = item.schkz)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Schkz text: " + item.schkz_text,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Schkz text: ", value = item.schkz_text)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "File name: " + item.filename,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "File name : ", value = item.filename)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Exported: " + item.exported,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Exported: ", value = item.exported)
                     }
                     item {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = "Type: " + item.typk,
-                                style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp// Change the text size here
-                                ),
-                                modifier = Modifier.weight(8f)
-                            )
-                        }
+                        showItemDetail(title = "Typk: ", value = item.typk)
                     }
                 }
             }
@@ -186,6 +90,33 @@ fun ItemDetailScreen(
 
             WebView()
         }
+    }
+}
+
+@Composable
+fun showItemDetail(title: String, value: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text(
+            text = title,
+            style = TextStyle(
+                color = Color.Black,
+                fontSize = 25.sp // Change the text size here
+            ),
+            modifier = Modifier.weight(1f) // Adjust weight as needed
+        )
+        Text(
+            text = value,
+            style = TextStyle(
+                color = Color.DarkGray,
+                fontSize = 20.sp // Change the text size here
+            ),
+            modifier = Modifier.weight(1f) // Adjust weight as needed
+        )
     }
 }
 
