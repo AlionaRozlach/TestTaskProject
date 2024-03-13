@@ -5,7 +5,7 @@ import space.rozlach.testtaskproject.domain.model.ItemDetail
 data class ItemDetailDto(
     val popisk: String = "",
     val schkz: String = "",
-    val schkzText: String = "",
+    val schkz_text: String = "",
     val typk: String = "",
     val begda: String = "",
     val endda: String = "",
@@ -16,7 +16,7 @@ data class ItemDetailDto(
         return ItemDetail(
             popisk = popisk,
             schkz = schkz,
-            schkzText = schkzText,
+            schkz_text = schkz_text,
             typk = typk,
             begda = begda,
             endda = endda,
