@@ -25,25 +25,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(color = MaterialTheme.colors.background) {
-//                    val navController = rememberNavController()
-//                    NavHost(
-//                        navController = navController,
-//                        startDestination = Screen.ItemListScreen.route
-//                    ) {
-//                        composable(
-//                            route = Screen.ItemListScreen.route
-//                        ) {
-//                            ItemListScreen(navController)
-//                        }
-//                        composable(
-//                            route = Screen.ItemDetailScreen.route + "/{itemPopisk}"
-//                        ) {
-//                            ItemDetailScreen()
-//                        }
                 DestinationsNavHost(navGraph = NavGraphs.root)
-
             }
         }
     }
-//    }
 }

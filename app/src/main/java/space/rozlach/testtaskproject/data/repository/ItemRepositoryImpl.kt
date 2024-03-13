@@ -44,7 +44,7 @@ class ItemRepositoryImpl @Inject constructor(
             try {
                 deferred.await()
             } catch (e: Exception) {
-                throw e // Rethrow any exceptions caught during await
+                throw e
             }
         }
     }
@@ -56,24 +56,16 @@ class ItemRepositoryImpl @Inject constructor(
             var item: ItemDetailDto? = null
             database.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot != null) {
-                        for (itemSnapshot in snapshot.children) {
-                            // Access each item and do something with it
-                            item = itemSnapshot.getValue(ItemDetailDto::class.java)
-                            // Process the item
-                        }
-                    } else {
-                        // Handle error
+                    for (itemSnapshot in snapshot.children) {
+                        item = itemSnapshot.getValue(ItemDetailDto::class.java)
                     }
                     if (item != null)
                         deferred.complete(item!!)
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     deferred.completeExceptionally(error.toException())
                 }
             })
-
             try {
                 deferred.await()
             } catch (e: Exception) {

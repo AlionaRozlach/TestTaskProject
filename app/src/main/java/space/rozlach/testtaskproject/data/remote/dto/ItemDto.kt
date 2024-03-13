@@ -15,7 +15,6 @@ data class ItemDto(
     fun toItem(): Item {
         return Item(
             popisk = popisk,
-            // Uncomment the lines below if you want to include additional properties
             schkz = schkz,
             schkz_text = schkz_text,
             typk = typk,
