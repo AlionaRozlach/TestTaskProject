@@ -51,8 +51,7 @@ class ItemRepositoryImpl @Inject constructor(
 
     override suspend fun getItemDetail(popisk: String): ItemDetailDto? {
         return withContext(Dispatchers.IO) {
-            val deferred = CompletableDeferred<ItemDetailDto>()
-            val query: Query = database.orderByChild("popisk").equalTo(popisk)
+            val deferred = CompletableDeferred<ItemDetailDto?>()
             var item: ItemDetailDto? = null
             database.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -61,7 +60,10 @@ class ItemRepositoryImpl @Inject constructor(
                     }
                     if (item != null)
                         deferred.complete(item!!)
+                    else
+                        deferred.complete(null) // No item found, complete with null
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     deferred.completeExceptionally(error.toException())
                 }
