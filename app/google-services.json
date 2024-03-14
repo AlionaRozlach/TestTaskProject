@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "79709866375",
+    "firebase_url": "https://testtaskproject-b7728-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "testtaskproject-b7728",
+    "storage_bucket": "testtaskproject-b7728.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79709866375:android:827f791dfc7a04427b6b22",
+        "android_client_info": {
+          "package_name": "space.rozlach.testtaskproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8OwQeKjpu78paLDIiBrSaNpw1dTSZ1E4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
