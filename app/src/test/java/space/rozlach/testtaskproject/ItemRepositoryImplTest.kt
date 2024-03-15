@@ -1,17 +1,17 @@
 package space.rozlach.testtaskproject
 
-import com.google.firebase.database.*
-import kotlinx.coroutines.CompletableDeferred
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.runBlocking
-import org.junit.After
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.mockito.*
-import org.mockito.Mockito.`when`
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.argumentCaptor
-import space.rozlach.testtaskproject.data.remote.dto.ItemDetailDto
 import space.rozlach.testtaskproject.data.remote.dto.ItemDto
 import space.rozlach.testtaskproject.data.repository.ItemRepositoryImpl
 import kotlin.test.assertEquals

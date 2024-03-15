@@ -2,7 +2,6 @@ package space.rozlach.testtaskproject.domain.use_case.date_parse
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class ParseDateUseCase {
