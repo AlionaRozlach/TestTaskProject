@@ -27,52 +27,52 @@ class GetItemUseCaseTest {
     fun `test success scenario`() = runBlockingTest {
         // Mock repository response
         val mockItemDetailDto = ItemDetailDto("itemId", "itemName", "itemDescription")
-        val mockItemDetail =
-            mockItemDetailDto.toItemDetail() // Assuming you have a conversion method
-        coEvery { repository.getItemDetail(any()) } returns mockItemDetailDto
+        val mockItemDetail = mockItemDetailDto.toItemDetail() // Assuming you have a conversion method
+        coEvery { repository.getItemDetail(any(), any()) } returns mockItemDetailDto
 
         // Invoke the use case
         val result = mutableListOf<Resource<ItemDetail>>()
-        getItemUseCase("itemId").collect {
+        getItemUseCase("itemId", 0).collect {
             result.add(it)
         }
 
         // Check the result
-        assertEquals(1, result.size) 
+        assertEquals(1, result.size)
         val successResult = result[0]
         assertTrue(successResult is Resource.Success)
-        assertEquals(mockItemDetail, successResult.data)    }
+        assertEquals(mockItemDetail, (successResult as Resource.Success).data)
+    }
 
     @Test
     fun `test FirebaseException scenario`() = runBlocking {
-            // Mock repository to throw FirebaseException
-            val errorMessage = "Firebase exception message"
-            coEvery { repository.getItemDetail(any()) } throws FirebaseException(errorMessage)
+        // Mock repository to throw FirebaseException
+        val errorMessage = "Firebase exception message"
+        coEvery { repository.getItemDetail(any(), any()) } throws FirebaseException(errorMessage)
 
-            // Invoke the use case
-            val result = mutableListOf<Resource<ItemDetail>>()
-            getItemUseCase("itemId").collect { result.add(it) }
+        // Invoke the use case
+        val result = mutableListOf<Resource<ItemDetail>>()
+        getItemUseCase("itemId", 0).collect { result.add(it) }
 
-            // Check the result
-            assertEquals(1, result.size)
-            assertTrue(result[0] is Resource.Error)
-            assertEquals(errorMessage, (result[0] as Resource.Error).message)
-        }
+        // Check the result
+        assertEquals(1, result.size)
+        assertTrue(result[0] is Resource.Error)
+        assertEquals(errorMessage, (result[0] as Resource.Error).message)
+    }
 
 
     @Test
     fun `test IOException scenario`() = runBlocking {
-            // Mock repository to throw FirebaseException
-            val errorMessage = "Couldn't reach server. Check your internet connection."
-            coEvery { repository.getItemDetail(any()) } throws IOException(errorMessage)
+        // Mock repository to throw IOException
+        val errorMessage = "Couldn't reach server. Check your internet connection."
+        coEvery { repository.getItemDetail(any(), any()) } throws IOException(errorMessage)
 
-            // Invoke the use case
-            val result = mutableListOf<Resource<ItemDetail>>()
-            getItemUseCase("itemId").collect { result.add(it) }
+        // Invoke the use case
+        val result = mutableListOf<Resource<ItemDetail>>()
+        getItemUseCase("itemId", 0).collect { result.add(it) }
 
-            // Check the result
-            assertEquals(1, result.size)
-            assertTrue(result[0] is Resource.Error)
-            assertEquals(errorMessage, (result[0] as Resource.Error).message)
-        }
+        // Check the result
+        assertEquals(1, result.size)
+        assertTrue(result[0] is Resource.Error)
+        assertEquals(errorMessage, (result[0] as Resource.Error).message)
     }
+}
