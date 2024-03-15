@@ -41,9 +41,7 @@ class GetItemUseCaseTest {
         }
 
         // Check the result
-        assertEquals(1, result.size) // Loading + Success
-//        val loadingResult = result[0]
-//        assertTrue(loadingResult is Resource.Loading)
+        assertEquals(1, result.size) 
         val successResult = result[0]
         assertTrue(successResult is Resource.Success)
         assertEquals(mockItemDetail, successResult.data)    }

@@ -30,7 +30,7 @@ class ItemDetailViewModel @Inject constructor(
             getItem(popisk)
     }
 
-    private fun getItem(popisk: String) {
+    internal fun getItem(popisk: String) {
         getItemUseCase(popisk).onEach { result ->
             when (result) {
                 is Resource.Success -> {

@@ -11,6 +11,7 @@ import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.domain.use_case.get_items.GetItemsUseCase
 import javax.inject.Inject
 
+
 @HiltViewModel
 class ItemsListViewModel @Inject constructor(private val getItemsUseCase: GetItemsUseCase) :
     ViewModel() {
@@ -23,9 +24,9 @@ class ItemsListViewModel @Inject constructor(private val getItemsUseCase: GetIte
         getItems()
     }
 
-    private fun getItems(){
+    private fun getItems() {
         getItemsUseCase().onEach { result ->
-            when(result){
+            when (result) {
                 is Resource.Success -> {
                     _state.value = ItemsListState(items = result.data ?: emptyList())
                 }
@@ -33,7 +34,8 @@ class ItemsListViewModel @Inject constructor(private val getItemsUseCase: GetIte
                     _state.value = ItemsListState(isLoading = true)
                 }
                 is Resource.Error -> {
-                    _state.value = ItemsListState(error = result.message ?: "An unexpected error occured")
+                    _state.value =
+                        ItemsListState(error = result.message ?: "An unexpected error occured")
                 }
             }
         }.launchIn(viewModelScope)

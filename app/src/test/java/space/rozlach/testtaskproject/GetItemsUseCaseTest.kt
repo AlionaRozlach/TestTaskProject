@@ -35,8 +35,7 @@ class GetItemsUseCaseTest {
         val states = flow.toList()
 
         // Verify emitted states
-        // Check the result
-        assertEquals(1, states.size) // Loading + Success
+        assertEquals(1, states.size)
         val successResult = states[0]
         assertTrue(successResult is Resource.Success)
         assertEquals(mockItemsList, successResult.data)
