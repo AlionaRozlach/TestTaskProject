@@ -3,18 +3,24 @@ package space.rozlach.testtaskproject.presentation.items_detail
 import android.annotation.SuppressLint
 import android.net.http.SslError
 import android.util.Log
-import android.webkit.*
-import androidx.compose.foundation.layout.*
+import android.webkit.SslErrorHandler
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,19 +34,32 @@ import com.google.android.material.snackbar.Snackbar
 import com.ramcosta.composedestinations.annotation.Destination
 import space.rozlach.testtaskproject.core.Constants
 import space.rozlach.testtaskproject.presentation.date_parse.DateViewModel
-import java.util.Date
+import java.util.Locale
 
 @Composable
 @Destination
 fun ItemDetailScreen(
     popisk: String,
-    position:Int,
+    position: Int,
     viewModel: ItemDetailViewModel = hiltViewModel(),
     dateViewModel: DateViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
 
     Column(Modifier.fillMaxWidth()) {
+        Text(
+            text = "${popisk.uppercase(Locale.ROOT)}",
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp)
+                .align(Alignment.CenterHorizontally),
+            style = TextStyle(
+                color = Color.Black,
+                fontSize = 30.sp // Change the text size here
+            )
+        )
         Box(
             Modifier
                 .weight(1f)
