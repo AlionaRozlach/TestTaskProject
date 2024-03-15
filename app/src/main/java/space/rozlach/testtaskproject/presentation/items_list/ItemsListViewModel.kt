@@ -11,7 +11,6 @@ import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.domain.use_case.get_items.GetItemsUseCase
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ItemsListViewModel @Inject constructor(private val getItemsUseCase: GetItemsUseCase) :
     ViewModel() {

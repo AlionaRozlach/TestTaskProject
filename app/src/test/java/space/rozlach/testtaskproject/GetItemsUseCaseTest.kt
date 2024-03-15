@@ -2,15 +2,13 @@ package space.rozlach.testtaskproject
 
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.mockito.kotlin.mock
 import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.data.remote.dto.ItemDto
-import space.rozlach.testtaskproject.domain.model.Item
 import space.rozlach.testtaskproject.domain.repository.ItemRepository
 import space.rozlach.testtaskproject.domain.use_case.get_items.GetItemsUseCase
 import java.io.IOException

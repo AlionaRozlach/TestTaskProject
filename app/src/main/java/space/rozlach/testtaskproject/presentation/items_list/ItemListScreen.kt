@@ -14,11 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import space.rozlach.testtaskproject.presentation.Screen
 import space.rozlach.testtaskproject.presentation.destinations.ItemDetailScreenDestination
 import space.rozlach.testtaskproject.presentation.items_list.components.ItemListElement
 
@@ -27,7 +25,7 @@ import space.rozlach.testtaskproject.presentation.items_list.components.ItemList
 fun ItemListScreen(
     navigator: DestinationsNavigator,
     viewModel: ItemsListViewModel = hiltViewModel()
-){
+) {
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -40,7 +38,7 @@ fun ItemListScreen(
                 )
             }
         }
-        if(state.error.isNotBlank()) {
+        if (state.error.isNotBlank()) {
             Text(
                 text = state.error,
                 color = MaterialTheme.colors.error,
@@ -51,7 +49,7 @@ fun ItemListScreen(
                     .align(Alignment.Center)
             )
         }
-        if(state.isLoading) {
+        if (state.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }

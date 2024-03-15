@@ -8,11 +8,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import space.rozlach.testtaskproject.core.Constants
 import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.domain.use_case.get_item.GetItemUseCase
-import space.rozlach.testtaskproject.domain.use_case.get_items.GetItemsUseCase
 import javax.inject.Inject
 
 @HiltViewModel

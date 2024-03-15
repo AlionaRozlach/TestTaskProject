@@ -4,9 +4,11 @@ import com.google.firebase.FirebaseException
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import space.rozlach.testtaskproject.core.Resource
 import space.rozlach.testtaskproject.data.remote.dto.ItemDetailDto
@@ -14,11 +16,6 @@ import space.rozlach.testtaskproject.domain.model.ItemDetail
 import space.rozlach.testtaskproject.domain.repository.ItemRepository
 import space.rozlach.testtaskproject.domain.use_case.get_item.GetItemUseCase
 import java.io.IOException
-import org.junit.Assert.assertEquals
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.launch
-import org.junit.Assert.assertTrue
 
 class GetItemUseCaseTest {
 
