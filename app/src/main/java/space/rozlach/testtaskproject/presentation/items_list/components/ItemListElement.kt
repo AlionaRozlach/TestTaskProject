@@ -15,12 +15,13 @@ import space.rozlach.testtaskproject.domain.model.Item
 @Composable
 fun ItemListElement(
     item: Item,
-    onItemClick: (Item) -> Unit
+    position: Int,
+   onItemClick: (Item, Int) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClick(item) }
+            .clickable {  onItemClick(item, position)}
             .padding(25.dp)
     ){
             Text(

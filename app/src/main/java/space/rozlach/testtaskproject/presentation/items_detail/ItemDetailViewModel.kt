@@ -23,12 +23,14 @@ class ItemDetailViewModel @Inject constructor(
 
     init {
         val popisk = savedStateHandle.get<String>("popisk")
+        val position = savedStateHandle.get<Int>("position")
+
         if (!popisk.isNullOrEmpty())
-            getItem(popisk)
+            position?.let { getItem(popisk, it) }
     }
 
-    internal fun getItem(popisk: String) {
-        getItemUseCase(popisk).onEach { result ->
+    internal fun getItem(popisk: String, position: Int) {
+        getItemUseCase(popisk, position).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = ItemDetailState(items = result.data)

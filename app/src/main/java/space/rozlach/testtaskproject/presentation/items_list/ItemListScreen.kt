@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -29,11 +30,12 @@ fun ItemListScreen(
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.items) { item ->
+            itemsIndexed(state.items) { index, item ->
                 ItemListElement(
                     item = item,
-                    onItemClick = {
-                        navigator.navigate(ItemDetailScreenDestination(item.popisk))
+                    position = index,
+                    onItemClick = { clickedItem, clickedPosition ->
+                        navigator.navigate(ItemDetailScreenDestination(clickedItem.popisk, clickedPosition))
                     }
                 )
             }

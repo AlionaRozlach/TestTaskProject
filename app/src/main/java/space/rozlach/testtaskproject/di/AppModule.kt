@@ -7,6 +7,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import space.rozlach.testtaskproject.data.repository.ItemRepositoryImpl
 import space.rozlach.testtaskproject.domain.repository.ItemRepository
+import space.rozlach.testtaskproject.domain.use_case.get_item.GetItemUseCase
+import space.rozlach.testtaskproject.domain.use_case.get_items.GetItemsUseCase
 import javax.inject.Singleton
 
 @Module
@@ -23,5 +25,14 @@ object AppModule{
     @Singleton
     fun provideItemRepository(firebaseDb: FirebaseDatabase): ItemRepository {
         return ItemRepositoryImpl(firebaseDb)
+    }
+
+    @Provides
+    fun provideGetItemUseCase(itemRepository: ItemRepository): GetItemUseCase {
+        return GetItemUseCase(itemRepository)
+    }
+    @Provides
+    fun provideGetItemsUseCase(itemRepository: ItemRepository): GetItemsUseCase {
+        return GetItemsUseCase(itemRepository)
     }
 }

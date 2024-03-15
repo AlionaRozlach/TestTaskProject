@@ -10,6 +10,11 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,14 +27,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.ramcosta.composedestinations.annotation.Destination
 import space.rozlach.testtaskproject.core.Constants
+import space.rozlach.testtaskproject.presentation.date_parse.DateViewModel
+import java.util.Date
 
 @Composable
 @Destination
 fun ItemDetailScreen(
     popisk: String,
-    viewModel: ItemDetailViewModel = hiltViewModel()
+    position:Int,
+    viewModel: ItemDetailViewModel = hiltViewModel(),
+    dateViewModel: DateViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+
     Column(Modifier.fillMaxWidth()) {
         Box(
             Modifier
@@ -42,10 +52,27 @@ fun ItemDetailScreen(
                         showItemDetail(title = "Popis: ", value = item.popisk)
                     }
                     item {
-                        showItemDetail(title = "Begda: ", value = item.begda)
+                        val begda =
+                            dateViewModel.parseDate(item.begda) ?: "Error parsing date"
+                        showItemDetail(
+                            title = "Begda: ",
+                            value = begda
+                        )
                     }
                     item {
-                        showItemDetail(title = "End date: ", value = item.endda)
+                        val endda =
+                            dateViewModel.parseDate(item.endda) ?: "Error parsing date"
+                        showItemDetail(
+                            title = "End date: ",
+                            value = endda
+                        )
+                    }
+                    item {
+                        showItemDetail(
+                            title = "Exported: ",
+                            dateViewModel.parseDateAndTime(item.exported)
+                                ?: "Error parsing date and time "
+                        )
                     }
                     item {
                         showItemDetail(title = "Schkz: ", value = item.schkz)
@@ -55,9 +82,6 @@ fun ItemDetailScreen(
                     }
                     item {
                         showItemDetail(title = "File name : ", value = item.filename)
-                    }
-                    item {
-                        showItemDetail(title = "Exported: ", value = item.exported)
                     }
                     item {
                         showItemDetail(title = "Typk: ", value = item.typk)

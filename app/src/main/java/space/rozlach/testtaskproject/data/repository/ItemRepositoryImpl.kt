@@ -1,18 +1,11 @@
 package space.rozlach.testtaskproject.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.*
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import space.rozlach.testtaskproject.data.remote.dto.ItemDetailDto
 import space.rozlach.testtaskproject.data.remote.dto.ItemDto
-import space.rozlach.testtaskproject.domain.model.ItemDetail
 import space.rozlach.testtaskproject.domain.repository.ItemRepository
 import javax.inject.Inject
 
@@ -49,21 +42,22 @@ class ItemRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getItemDetail(popisk: String): ItemDetailDto? {
+    override suspend fun getItemDetail(popisk: String, position: Int): ItemDetailDto? {
         return withContext(Dispatchers.IO) {
             val deferred = CompletableDeferred<ItemDetailDto?>()
-            var item: ItemDetailDto? = null
             database.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for (itemSnapshot in snapshot.children) {
-                        item = itemSnapshot.getValue(ItemDetailDto::class.java)
+                    var index = 0
+                    snapshot.children.forEach { itemSnapshot ->
+                        val item = itemSnapshot.getValue(ItemDetailDto::class.java)
+                        if (item?.popisk == popisk && index == position) {
+                            deferred.complete(item)
+                            return@forEach
+                        }
+                        index++
                     }
-                    if (item != null)
-                        deferred.complete(item!!)
-                    else
-                        deferred.complete(null) // No item found, complete with null
+                    deferred.complete(null)
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     deferred.completeExceptionally(error.toException())
                 }
@@ -71,7 +65,7 @@ class ItemRepositoryImpl @Inject constructor(
             try {
                 deferred.await()
             } catch (e: Exception) {
-                throw e // Rethrow any exceptions caught during await
+                throw e
             }
         }
     }

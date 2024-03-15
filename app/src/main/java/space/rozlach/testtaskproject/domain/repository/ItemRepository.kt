@@ -7,5 +7,5 @@ import space.rozlach.testtaskproject.domain.model.ItemDetail
 
 interface ItemRepository {
     suspend fun getItemsList():List<ItemDto>
-    suspend fun getItemDetail(popisk: String): ItemDetailDto?
+    suspend fun getItemDetail(popisk: String, position: Int): ItemDetailDto?
 }
